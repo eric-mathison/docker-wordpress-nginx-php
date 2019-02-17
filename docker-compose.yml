@@ -1,0 +1,42 @@
+version: "3"
+services: 
+  mysql:
+    image: mariadb:10.3
+    volumes: 
+      - db_data:/var/lib/mysql
+    environment: 
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=wp_user
+      - MYSQL_PASSWORD=wp_password
+      - MYSQL_DATABASE=wordpress
+    restart: always
+    command:
+      'mysqld --innodb-flush-method=fsync'
+  
+  wordpress:
+    image: ericmathison/wordpress-php:latest
+    depends_on:
+      - mysql
+    volumes:
+      - ./wp_data:/var/www/html
+      - wp_cache:/var/cache/nginxfastcgi
+    environment: 
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_TABLE_PREFIX=wp_
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_PASSWORD=wp_password
+      - WORDPRESS_DB_USER=wp_user
+
+  nginx:
+    image: ericmathison/wordpress-nginx:latest
+    depends_on:
+      - wordpress
+    ports:
+      - '80:80'
+    volumes:
+      - ./wp_data:/var/www/html
+      - wp_cache:/var/cache/nginxfastcgi
+
+volumes:
+  wp_cache:
+  db_data:
