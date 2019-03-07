@@ -14,7 +14,7 @@ services:
       'mysqld --innodb-flush-method=fsync'
   
   wordpress:
-    image: ericmathison/wordpress-php:5.0.3
+    image: ericmathison/wordpress-php:latest
     depends_on:
       - mysql
     volumes:
