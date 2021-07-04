@@ -1,16 +1,16 @@
-# docker-wordpress-nginx-php
+# Docker Compose Wordpress Dev
 
-A docker compose build for local wordpress development. 
+A simple docker compose deployment for local wordpress development. 
 
 Nginx, MariaDB, PHPFPM with FastCgi Caching
 
-Preinstalls most common used plugins and themes and mounts ```/var/www/html``` locally for ease of development with IDEs.
+Preinstalls most common used plugins and themes and mounts `/var/www/html` locally for ease of development with IDEs.
 
 ## Install
 
 Clone the repository to a directory
 ```
-git clone https://github.com/eric-mathison/docker-wordpress-nginx.php.git
+gh repo clone eric-mathison/dockercompose-wordpress-dev
 ```
 
 ## Usage
@@ -19,4 +19,4 @@ git clone https://github.com/eric-mathison/docker-wordpress-nginx.php.git
 docker-compose up
 ```
 
-Connect using ```http://localhost```
+Connect using `http://localhost`
